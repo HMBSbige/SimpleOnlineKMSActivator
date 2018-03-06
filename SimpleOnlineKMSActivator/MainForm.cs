@@ -1,20 +1,151 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SimpleOnlineKMSActivator
 {
     public partial class MainForm : Form
     {
+        #region Form
+
         public MainForm()
         {
             InitializeComponent();
+            _label3CallBack = ChangeLabel3;
+            _textBox1Add1CallBack = TextBox1Add;
+            _getcombobox1 = GetComboBox1Text;
+            _getcombobox2 = GetComboBox2Text;
+            _progressBarPerformStepCallBack = UpdateProgressBar1;
+            _textBox1ChangeCallBack = TextBox1Set;
+            _progressBarResetCallBack = ResetProgressBar1;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            var t = new Task(() =>
+            {
+                label_version.Invoke(_label3CallBack, GetWindowsVersion());
+            });
+            t.Start();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DisableControl();
+                var t = new Task(() =>
+                {
+                    var key = Invoke(_getcombobox1) as string;
+                    var server = Invoke(_getcombobox2) as string;
+                    textBox1.Invoke(_textBox1ChangeCallBack, string.Empty);
+                    progressBar1.Invoke(_progressBarResetCallBack);
+                    textBox1.Invoke(_textBox1Add1CallBack, SetLicenseKey(key) + Environment.NewLine);
+                    progressBar1.Invoke(_progressBarPerformStepCallBack);
+                    textBox1.Invoke(_textBox1Add1CallBack, SetKMSServer(server) + Environment.NewLine);
+                    progressBar1.Invoke(_progressBarPerformStepCallBack);
+                    textBox1.Invoke(_textBox1Add1CallBack, ActivateWindows() + Environment.NewLine);
+                    progressBar1.Invoke(_progressBarPerformStepCallBack);
+                    textBox1.Invoke(_textBox1Add1CallBack, GetWindowsLicense() + Environment.NewLine);
+                });
+                t.Start();
+                t.ContinueWith(task =>
+                {
+                    BeginInvoke(new VoidMethodDelegate(EnableControl));
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, @"出错了", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                EnableControl();
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(@"https://github.com/HMBSbige/kms-server#windows-gvlk-%E5%AF%86%E9%92%A5%E5%AF%B9%E7%85%A7%E8%A1%A8kms-%E6%BF%80%E6%B4%BB%E4%B8%93%E7%94%A8");
+        }
+
+        #endregion
+
+        #region delegate_define
+
+        private delegate void LabelCallBack(string str);
+        private readonly LabelCallBack _label3CallBack;
+
+        private delegate void VoidMethodDelegate();
+        private readonly VoidMethodDelegate _progressBarPerformStepCallBack;
+        private readonly VoidMethodDelegate _progressBarResetCallBack;
+
+        private delegate void TextBoxTextCallBack(string str);
+        private readonly TextBoxTextCallBack _textBox1Add1CallBack;
+        private readonly TextBoxTextCallBack _textBox1ChangeCallBack;
+
+        private delegate string GetTextCallBack();
+        private readonly GetTextCallBack _getcombobox1;
+        private readonly GetTextCallBack _getcombobox2;
+
+        #endregion
+
+        #region delegate_function
+
+        private void ChangeLabel3(string str)
+        {
+            label_version.Text += str;
+        }
+
+        private void TextBox1Add(string str)
+        {
+            textBox1.Text += str;
+        }
+
+        private void TextBox1Set(string str)
+        {
+            textBox1.Text = str;
+        }
+
+        private string GetComboBox1Text()
+        {
+            return comboBox1.Text;
+        }
+
+        private string GetComboBox2Text()
+        {
+            return comboBox2.Text;
+        }
+
+        private void ResetProgressBar1()
+        {
+            progressBar1.Value = 0;
+        }
+
+        private void UpdateProgressBar1()
+        {
+            progressBar1.PerformStep();
+        }
+
+        private void DisableControl()
+        {
+            button1.Enabled = false;
+            comboBox1.Enabled = false;
+            comboBox2.Enabled = false;
+            comboBox3.Enabled = false;
+        }
+
+        private void EnableControl()
+        {
+            button1.Enabled = true;
+            comboBox1.Enabled = true;
+            comboBox2.Enabled = true;
+            comboBox3.Enabled = true;
+        }
+
+        #endregion
+        
+        #region basefunction
 
         private static string GetCMDOutput(string cmd)
         {
@@ -77,20 +208,7 @@ namespace SimpleOnlineKMSActivator
             return GetCMDOutput(cmd);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            button1.Enabled = false;
-            textBox1.Text = string.Empty;
-            textBox1.Text += GetWindowsVersion() + Environment.NewLine;
-            progressBar1.Value = 0;
-            textBox1.Text += SetLicenseKey(@"W269N-WFGWX-YVC9B-4J6C9-T83GX") + Environment.NewLine;
-            progressBar1.PerformStep();
-            textBox1.Text += SetKMSServer(@"kms.bige0.com") + Environment.NewLine;
-            progressBar1.PerformStep();
-            textBox1.Text += ActivateWindows() + Environment.NewLine;
-            progressBar1.PerformStep();
-            textBox1.Text += GetWindowsLicense() + Environment.NewLine;
-            button1.Enabled = true;
-        }
+        #endregion
+
     }
 }
