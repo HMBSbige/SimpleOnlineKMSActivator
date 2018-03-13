@@ -41,16 +41,16 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label_version = new System.Windows.Forms.Label();
             this.officeTabPage = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_OfficePath = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.windowsTabPage.SuspendLayout();
             this.officeTabPage.SuspendLayout();
@@ -194,7 +194,7 @@
             this.officeTabPage.Controls.Add(this.button6);
             this.officeTabPage.Controls.Add(this.button5);
             this.officeTabPage.Controls.Add(this.button4);
-            this.officeTabPage.Controls.Add(this.textBox2);
+            this.officeTabPage.Controls.Add(this.textBox_OfficePath);
             this.officeTabPage.Location = new System.Drawing.Point(4, 22);
             this.officeTabPage.Name = "officeTabPage";
             this.officeTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -202,6 +202,16 @@
             this.officeTabPage.TabIndex = 1;
             this.officeTabPage.Text = "Office";
             this.officeTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(6, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(143, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "该目录下不存在 OSPP.VBS";
             // 
             // progressBar2
             // 
@@ -252,18 +262,18 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox2
+            // textBox_OfficePath
             // 
-            this.textBox2.AllowDrop = true;
-            this.textBox2.Location = new System.Drawing.Point(6, 6);
-            this.textBox2.MaxLength = 0;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(191, 21);
-            this.textBox2.TabIndex = 0;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.textBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox2_DragDrop);
-            this.textBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox2_DragEnter);
+            this.textBox_OfficePath.AllowDrop = true;
+            this.textBox_OfficePath.Location = new System.Drawing.Point(6, 6);
+            this.textBox_OfficePath.MaxLength = 0;
+            this.textBox_OfficePath.Name = "textBox_OfficePath";
+            this.textBox_OfficePath.ReadOnly = true;
+            this.textBox_OfficePath.Size = new System.Drawing.Size(191, 21);
+            this.textBox_OfficePath.TabIndex = 0;
+            this.textBox_OfficePath.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox_OfficePath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox2_DragDrop);
+            this.textBox_OfficePath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox2_DragEnter);
             // 
             // comboBox2
             // 
@@ -297,16 +307,6 @@
             this.groupBox1.Size = new System.Drawing.Size(324, 53);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(6, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "该目录下不存在 OSPP.VBS";
             // 
             // MainForm
             // 
@@ -351,7 +351,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_OfficePath;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button7;

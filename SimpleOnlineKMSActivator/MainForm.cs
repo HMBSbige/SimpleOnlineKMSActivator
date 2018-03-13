@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace SimpleOnlineKMSActivator
 {
@@ -24,6 +25,7 @@ namespace SimpleOnlineKMSActivator
             _progressBar2ResetCallBack = ResetProgressBar2;
             _textBox1ChangeCallBack = TextBox1Set;
             _gettextbox2 = GetTextbox2Text;
+            _textBox2ChangeCallBack = SetTextbox2Text;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -33,6 +35,7 @@ namespace SimpleOnlineKMSActivator
             var t = new Task(() =>
             {
                 label_version.Invoke(_label3CallBack, GetWindowsVersion());
+                textBox_OfficePath.Invoke(_textBox2ChangeCallBack, GetOfficePath());
             });
             t.Start();
         }
@@ -165,12 +168,12 @@ namespace SimpleOnlineKMSActivator
             {
                 Description = @"打开",
                 ShowNewFolderButton = false,
-                SelectedPath = textBox2.Text
+                SelectedPath = textBox_OfficePath.Text
             };
             path.ShowDialog();
             if (path.SelectedPath != string.Empty)
             {
-                textBox2.Text = path.SelectedPath;
+                textBox_OfficePath.Text = path.SelectedPath;
             }
         }
 
@@ -186,7 +189,7 @@ namespace SimpleOnlineKMSActivator
 
         private void textBox2_DragDrop(object sender, DragEventArgs e)
         {
-            textBox2.Text = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            textBox_OfficePath.Text = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
 
         private void textBox2_DragEnter(object sender, DragEventArgs e)
@@ -203,7 +206,7 @@ namespace SimpleOnlineKMSActivator
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (File.Exists($@"{textBox2.Text}\OSPP.VBS"))
+            if (File.Exists($@"{textBox_OfficePath.Text}\OSPP.VBS"))
             {
                 label3.Text = @"目录正确";
                 label3.ForeColor = Color.Green;
@@ -231,6 +234,7 @@ namespace SimpleOnlineKMSActivator
         private delegate void TextBoxTextCallBack(string str);
         private readonly TextBoxTextCallBack _textBox1Add1CallBack;
         private readonly TextBoxTextCallBack _textBox1ChangeCallBack;
+        private readonly TextBoxTextCallBack _textBox2ChangeCallBack;
 
         private delegate string GetTextCallBack();
         private readonly GetTextCallBack _getcombobox1;
@@ -314,7 +318,12 @@ namespace SimpleOnlineKMSActivator
 
         private string GetTextbox2Text()
         {
-            return textBox2.Text;
+            return textBox_OfficePath.Text;
+        }
+
+        private void SetTextbox2Text(string str)
+        {
+            textBox_OfficePath.Text = str;
         }
 
         #endregion
@@ -427,6 +436,20 @@ namespace SimpleOnlineKMSActivator
         {
             var cmd = $@"cscript ""{officePath}\OSPP.VBS"" /act";
             return GetOfficeOutput(cmd);
+        }
+        
+        private static string GetOfficePath()
+        {
+            string[] officeversion = {@"7.0", @"8.0", @"9.0", @"10.0", @"11.0", @"12.0", @"14.0", @"15.0", @"16.0"};
+            foreach (var ver in officeversion)
+            {
+                var officePath = Registry.LocalMachine.OpenSubKey($@"Software\Microsoft\Office\{ver}\Common\InstallRoot", false);
+                if (officePath != null)
+                {
+                    return officePath.GetValue(@"Path", string.Empty) as string;
+                }
+            }
+            return string.Empty;
         }
 
         #endregion
