@@ -111,9 +111,9 @@ namespace SimpleOnlineKMSActivator
                     var server = Invoke(_getcombobox2) as string;
                     textBox1.Invoke(_textBox1ChangeCallBack, string.Empty);
                     textBox1.Invoke(_textBox1Add1CallBack,
-                        @"cscript %SystemRoot%\System32\slmgr.vbs /ipk " + key + Environment.NewLine +
-                        @"cscript %SystemRoot%\System32\slmgr.vbs /skms " + server + Environment.NewLine +
-                        @"cscript %SystemRoot%\System32\slmgr.vbs /ato");
+                        $@"cscript %SystemRoot%\System32\slmgr.vbs /ipk {key}" + Environment.NewLine +
+                        $@"cscript %SystemRoot%\System32\slmgr.vbs /skms {server}"+ Environment.NewLine +
+                        @"cscript %SystemRoot%\System32\slmgr.vbs /ato" + Environment.NewLine);
                 });
                 t.Start();
                 t.ContinueWith(task =>
@@ -184,7 +184,32 @@ namespace SimpleOnlineKMSActivator
 
         private void button7_Click(object sender, EventArgs e)
         {
+            try
+            {
+                DisableControl();
+                var t = new Task(() =>
+                {
+                    var officePath = Invoke(_gettextbox2) as string;
+                    var server = Invoke(_getcombobox2) as string;
+                    var cmd1 = $@"cscript ""{officePath}\OSPP.VBS"" /sethst:{server}";
+                    var cmd2 = $@"cscript ""{officePath}\OSPP.VBS"" /act";
+                    textBox1.Invoke(_textBox1ChangeCallBack, string.Empty);
+                    textBox1.Invoke(_textBox1Add1CallBack,
+                        cmd1 + Environment.NewLine +
+                        cmd2 + Environment.NewLine);
 
+                });
+                t.Start();
+                t.ContinueWith(task =>
+                {
+                    BeginInvoke(new VoidMethodDelegate(EnableControl));
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, @"出错了", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                EnableControl();
+            }
         }
 
         private void textBox2_DragDrop(object sender, DragEventArgs e)
