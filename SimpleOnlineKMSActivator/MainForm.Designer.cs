@@ -34,13 +34,12 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.button1 = new System.Windows.Forms.Button();
             this.label_version = new System.Windows.Forms.Label();
             this.officeTabPage = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.button7 = new System.Windows.Forms.Button();
@@ -51,6 +50,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.WindowsKey = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.windowsTabPage.SuspendLayout();
             this.officeTabPage.SuspendLayout();
@@ -83,11 +83,10 @@
             // 
             // windowsTabPage
             // 
+            this.windowsTabPage.Controls.Add(this.WindowsKey);
             this.windowsTabPage.Controls.Add(this.comboBox3);
             this.windowsTabPage.Controls.Add(this.button3);
             this.windowsTabPage.Controls.Add(this.button2);
-            this.windowsTabPage.Controls.Add(this.label1);
-            this.windowsTabPage.Controls.Add(this.comboBox1);
             this.windowsTabPage.Controls.Add(this.progressBar1);
             this.windowsTabPage.Controls.Add(this.linkLabel1);
             this.windowsTabPage.Controls.Add(this.button1);
@@ -104,14 +103,15 @@
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(120, 37);
+            this.comboBox3.Location = new System.Drawing.Point(8, 37);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(180, 20);
+            this.comboBox3.Size = new System.Drawing.Size(300, 20);
             this.comboBox3.TabIndex = 9;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(135, 117);
+            this.button3.Location = new System.Drawing.Point(74, 90);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(86, 23);
             this.button3.TabIndex = 12;
@@ -121,46 +121,27 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(227, 117);
+            this.button2.Location = new System.Drawing.Point(162, 90);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(146, 23);
             this.button2.TabIndex = 11;
-            this.button2.Text = "查询";
+            this.button2.Text = "查询 Windows 激活状态";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 12);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "选择操作系统版本";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "W269N-WFGWX-YVC9B-4J6C9-T83GX"});
-            this.comboBox1.Location = new System.Drawing.Point(96, 64);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(204, 20);
-            this.comboBox1.TabIndex = 3;
-            // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(15, 90);
+            this.progressBar1.Location = new System.Drawing.Point(8, 119);
             this.progressBar1.Maximum = 3;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(206, 23);
+            this.progressBar1.Size = new System.Drawing.Size(219, 23);
             this.progressBar1.Step = 1;
             this.progressBar1.TabIndex = 2;
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(13, 67);
+            this.linkLabel1.Location = new System.Drawing.Point(3, 67);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(65, 12);
             this.linkLabel1.TabIndex = 8;
@@ -170,7 +151,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(227, 90);
+            this.button1.Location = new System.Drawing.Point(233, 119);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -181,13 +162,14 @@
             // label_version
             // 
             this.label_version.AutoSize = true;
-            this.label_version.Location = new System.Drawing.Point(13, 11);
+            this.label_version.Location = new System.Drawing.Point(6, 12);
             this.label_version.Name = "label_version";
             this.label_version.Size = new System.Drawing.Size(0, 12);
             this.label_version.TabIndex = 7;
             // 
             // officeTabPage
             // 
+            this.officeTabPage.Controls.Add(this.button8);
             this.officeTabPage.Controls.Add(this.label3);
             this.officeTabPage.Controls.Add(this.progressBar2);
             this.officeTabPage.Controls.Add(this.button7);
@@ -203,6 +185,16 @@
             this.officeTabPage.Text = "Office";
             this.officeTabPage.UseVisualStyleBackColor = true;
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(169, 35);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(139, 23);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "自动获取 Office 目录";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -215,16 +207,16 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(6, 127);
+            this.progressBar2.Location = new System.Drawing.Point(6, 97);
             this.progressBar2.Maximum = 2;
             this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(302, 23);
+            this.progressBar2.Size = new System.Drawing.Size(221, 23);
             this.progressBar2.Step = 1;
             this.progressBar2.TabIndex = 5;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(219, 93);
+            this.button7.Location = new System.Drawing.Point(74, 68);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(89, 23);
             this.button7.TabIndex = 4;
@@ -234,11 +226,11 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(233, 64);
+            this.button6.Location = new System.Drawing.Point(169, 68);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(139, 23);
             this.button6.TabIndex = 3;
-            this.button6.Text = "查询";
+            this.button6.Text = "查询 Office 激活状态";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -254,7 +246,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(233, 35);
+            this.button4.Location = new System.Drawing.Point(233, 97);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -308,6 +300,13 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
+            // WindowsKey
+            // 
+            this.WindowsKey.Location = new System.Drawing.Point(74, 63);
+            this.WindowsKey.Name = "WindowsKey";
+            this.WindowsKey.Size = new System.Drawing.Size(234, 21);
+            this.WindowsKey.TabIndex = 13;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -339,8 +338,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage windowsTabPage;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.LinkLabel linkLabel1;
@@ -358,6 +355,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TextBox WindowsKey;
     }
 }
 
